@@ -1,0 +1,17 @@
+{
+    "name": "oldtailor/sdk",
+    "authors": [
+        {
+            "name": "metooweb",
+            "email": "2947550545@qq.com"
+        }
+    ],
+    "require": {
+        "php-curl-class/php-curl-class": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "oldtailor\\sdk\\": "src/"
+        }
+    }
+}

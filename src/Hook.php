@@ -37,10 +37,13 @@ class Hook
             $this->user = $_POST['user'];
             $this->request = $_POST['request'];
             $data = $_POST['data'] ?? [];
+            header("Content-Type:application/json; charset=UTF-8");
 
             if ($this->pool[$event]){
                 try {
-                    call_user_func($this->pool[$event], $data);
+
+                    $data = call_user_func($this->pool[$event], $data);
+
                     $this->success($data);
 
                 }catch (ParamError $e){

@@ -34,15 +34,18 @@ class Notify
 
         while(true) {
 
+            $hasFrame = $stomp->hasFrame();
+
             //判断是否有读取的信息
-            if($stomp->hasFrame()) {
+            if($hasFrame) {
 
                 $frame = $stomp->readFrame();
+
                 try {
 
                     $data = json_decode($frame->body);
 
-                    foreach ($pool[$data->event] ?? [] as $item){
+                    foreach ($this->pool[$data->event] ?? [] as $item){
                         call_user_func($item,$data->data);
                     }
 

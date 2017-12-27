@@ -9,9 +9,16 @@
 
 namespace oldtailor\sdk;
 
+use oldtailor\sdk\errors\ConnectError;
+use oldtailor\sdk\errors\GateError;
+use oldtailor\sdk\errors\ParamError;
+use oldtailor\sdk\errors\LogicError;
+use oldtailor\sdk\errors\UserAuthError;
+use oldtailor\sdk\errors\SystemError;
+
 class Client
 {
-    public $api;
+    public $api="http://127.0.0.1/";
     public $token;
     public $appId;
     public $appKey;
@@ -19,16 +26,15 @@ class Client
 
     private $curl;
 
-
     public function __construct()
     {
-        $this->curl = new Curl\Curl();
+        $this->curl = new \Curl\Curl();
     }
 
 
-    public function call(string $method,array $params,string $app=""){
+    public function call(string $method,array $params = [],string $app=""){
 
-        $resp = $this->curl->post($this->app,[
+        $resp = $this->curl->post($this->api,[
             'app'  =>$app,
             'token'=>$this->token,
             'app_id'=>$this->appId,
@@ -38,6 +44,10 @@ class Client
         ]);
 
         if(!$resp) throw new ConnectError();
+
+        print_r($resp);
+        echo "\n";
+
         if($resp->ret_code != "SUCCESS" ) throw new GateError($resp->ret_msg);
 
         if($resp->res_code != "SUCCESS" ){

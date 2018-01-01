@@ -45,9 +45,6 @@ class Client
 
         if(!$resp) throw new ConnectError();
 
-        print_r($resp);
-        echo "\n";
-
         if($resp->ret_code != "SUCCESS" ) throw new GateError($resp->ret_msg);
 
         if($resp->res_code != "SUCCESS" ){

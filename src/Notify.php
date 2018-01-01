@@ -45,7 +45,7 @@ class Notify
 
                     $data = json_decode($frame->body);
 
-                    foreach ($this->pool[$data->event] ?? [] as $item){
+                    foreach ($this->pool[$data->event] ?: [] as $item){
                         call_user_func($item,$data->data);
                     }
 

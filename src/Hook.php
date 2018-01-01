@@ -36,7 +36,7 @@ class Hook
             $event = $_POST['event'];
             $this->user = $_POST['user'];
             $this->request = $_POST['request'];
-            $data = $_POST['data'] ?? [];
+            $data = $_POST['data'] ?: [];
             header("Content-Type:application/json; charset=UTF-8");
 
             if ($this->pool[$event]){
@@ -94,7 +94,7 @@ class Hook
         exit;
     }
 
-    private function error(int $code,string $des,int $sub_code=0){
+    private function error($code,$des,$sub_code=0){
 
         echo json_encode([
             'ret_code'=>'SUCCESS',

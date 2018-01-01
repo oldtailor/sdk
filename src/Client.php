@@ -32,7 +32,7 @@ class Client
     }
 
 
-    public function call(string $method,array $params = [],string $app=""){
+    public function call($method,$params = [],$app=""){
 
         $resp = $this->curl->post($this->api,[
             'app'  =>$app,
